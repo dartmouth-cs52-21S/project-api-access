@@ -1,4 +1,4 @@
-# Access
+# PROJECT: ACCESS
 
 ![Team Photo](https://user-images.githubusercontent.com/51734801/117523005-6b8eda00-af84-11eb-88cc-781ae657319a.jpg)
 [*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
@@ -7,7 +7,7 @@ TODO: short project description, some sample screenshots or mockups
 
 Access is a web application that enables users to generate a portfolio website automatically by filling in fields from their resume. Users will input information regarding their education, work experiences, projects, etc., and be returned a selection of website templates featuring different stylistic choices. This website will be automatically deployed by our application. 
 
-Mockup: 
+Mockup (ABOVE AND BEYOND): 
 
 <img width="540" alt="Screen Shot 2021-05-19 at 12 51 22 AM" src="https://user-images.githubusercontent.com/47261209/118758368-ee454e00-b83c-11eb-9e70-69e90ea483d2.png">
 
