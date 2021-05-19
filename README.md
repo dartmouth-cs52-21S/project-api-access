@@ -16,43 +16,43 @@ Mockup:
 ## Architecture
 
 TODO:  descriptions of code organization and tools and libraries used
-Material-UI: https://material-ui.com/
-Fab API: https://material-ui.com/api/fab/
-Textareaautosize:https://material-ui.com/components/textarea-autosize/
-React-markdown: https://github.com/remarkjs/react-markdown
-TLDR: https://github.com/tldr-pages/tldr
+- Material-UI: https://material-ui.com/
+- Fab API: https://material-ui.com/api/fab/
+- Textareaautosize:https://material-ui.com/components/textarea-autosize/
+- React-markdown: https://github.com/remarkjs/react-markdown
+- TLDR: https://github.com/tldr-pages/tldr
 
 ## Setup
 
 TODO: how to get the project dev environment up and running, npm install etc
-npm install
-ejs
-express
-mongoose
-bcrypt
+- npm install
+- ejs
+- express
+- mongoose
+- bcrypt
 
 ## Deployment
 
 TODO: how to deploy the project
 
-Netlify: We will deploy our app via Netlify, as we have done with previous assignments
-HerokuApp: We will be our live running server, that we will use to host our javascript/node server program
-Mongodb: Will be our database were we store:  
-email: { type: String, unique: true, lowercase: true },
-password: { type: String },
-name: { type: String },
-resume: { type: JSON },
-The resume JSON will contain information that the user inputs into our frontend, including education, projects, work experience, technical skills, etc.
+- Netlify: We will deploy our app via Netlify, as we have done with previous assignments
+- HerokuApp: We will be our live running server, that we will use to host our javascript/node server program
+- Mongodb: Will be our database were we store:  
+- email: { type: String, unique: true, lowercase: true },
+- password: { type: String },
+- name: { type: String },
+- resume: { type: JSON },
+- The resume JSON will contain information that the user inputs into our frontend, including education, projects, work experience, technical skills, etc.
 
 
 ## Authors
 
 TODO:
-Aadhya
-Luca
-Vico
-Jaime
-John
+- Aadhya
+- Luca
+- Vico
+- Jaime
+- John
 
 ## Acknowledgments
 Professor Tregubov and Samiha Datta for their supervision of our project!
