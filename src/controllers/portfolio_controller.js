@@ -6,16 +6,30 @@ import User from '../models/user_model';
 const templates = {
   0: {
     header: {
-      display: true,
-      color: 'white',
-      backgroundColor: 'black',
-      font: 'Raleway',
-      fontSize: '72px',
-      weight: 400,
-      padding: '300px',
-      // role: but taken from resume,
-      flexDirection: 'column',
-      justifyContent: 'center',
+      userName: {
+        display: true,
+        color: 'white',
+        backgroundColor: 'black',
+        font: 'Raleway',
+        fontSize: '72px',
+        weight: 400,
+        padding: '300px',
+        // role: but taken from resume,
+        flexDirection: 'column',
+        justifyContent: 'center',
+      },
+      role: {
+        display: true,
+        color: 'white',
+        backgroundColor: 'black',
+        font: 'Raleway',
+        fontSize: '72px',
+        weight: 400,
+        padding: '300px',
+        // role: but taken from resume,
+        flexDirection: 'column',
+        justifyContent: 'center',
+      },
     },
 
     aboutMe: {
@@ -60,20 +74,46 @@ const templates = {
 //   },
 };
 
-export const createPortfolio = async (templateId, userId) => {
+const chooseTemplateImages = {
+  0: 'https://files.slack.com/files-pri/TQ19QMD6Z-F022T0APB8W/screen_shot_2021-05-25_at_12.05.32_pm.png',
+};
+
+// export const createPortfolio = async (templateId) => {
+export const createPortfolio = async (templateId, userFields) => {
   // await creating a post
   // return post
   const portfolio = new Portfolio();
-  portfolio = { ...templates[templateId] };
-  const portfolioId = null;
+  const template = templates[templateId];
+  portfolio.header = template.header;
+  portfolio.aboutMe = template.aboutMe;
+  portfolio.projects = template.projects;
+  portfolio.contactMe = template.contactMe;
   try {
-    const savedPortfolio = await portfolio.save((err, pf) => {
-      portfolioId = pf.id;
-    });
-    const user = User.findById(userId);
-    user.portfolioIds.push(portfolioId); // add portfolio id to user's db
-    return savedPortfolio;
+    const savedPortfolio = await portfolio.save();
+    try {
+      await User.updateOne(
+        { email: userFields.email },
+        { $push: { portfolioIds: savedPortfolio.id } },
+      );
+    } catch (error) {
+      throw new Error(`failed to add portfolio to user: ${error}`);
+    }
+    await User.findOne({ email: userFields.email });
+    return portfolio;
   } catch (error) {
     throw new Error(`create portfolio error: ${error}`);
   }
+};
+
+export const updatePortfolio = async (id, portfolioFields) => {
+  try {
+    const portfolio = Portfolio.findOneAndUpdate({ _id: id }, portfolioFields, { new: true });
+    return portfolio;
+  } catch (error) {
+    throw new Error(`update portfolio error: ${error}`);
+  }
+};
+
+export const getTemplateImages = async () => {
+  return chooseTemplateImages;
 };
