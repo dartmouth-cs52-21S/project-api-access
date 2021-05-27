@@ -55,7 +55,7 @@ const handleGetPortfolios = async (req, res) => {
 const handleGetUserResume = async (req, res) => {
   try {
     console.log('resume');
-    // const result = await UserController.getUserResume(req.user);
+    // const result = await UserController.getUserResume(req.user.id);
     const result = await UserController.getUserResume(req.params.userID);
     res.json(result);
   } catch (error) {
