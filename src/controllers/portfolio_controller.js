@@ -117,3 +117,12 @@ export const updatePortfolio = async (id, portfolioFields) => {
 export const getTemplateImages = async () => {
   return chooseTemplateImages;
 };
+
+export const getPortfolio = async (id) => {
+  try {
+    const portfolio = Portfolio.findOne({ _id: id });
+    return portfolio;
+  } catch (error) {
+    throw new Error(`get portfolio error: ${error}`);
+  }
+};
