@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 const handleCreatePortfolio = async (req, res) => {
   try {
     // console.log('handlecreateportfolio', req.body);
-    const result = await Portfolios.createPortfolio(req.params.id, req.body);
+    const result = await Portfolios.createPortfolio(req.params.templateId, req.body);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -41,10 +41,31 @@ const handleUpdatePortfolio = async (req, res) => {
   }
 };
 
+const handleGetPortfolios = async (req, res) => {
+  try {
+    console.log('user id in handleGetPortfolios', req.user.id);
+    const result = await UserController.getUserPortfolios(req.user.id);
+    Portfolios.updatePortfolio(req.params.id, req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 const handleGetUserResume = async (req, res) => {
   try {
     console.log('resume');
+    // const result = await UserController.getUserResume(req.user);
     const result = await UserController.getUserResume(req.params.userID);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleGetPortfolio = async (req, res) => {
+  try {
+    const result = Portfolios.getPortfolio(req.params.id);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -72,11 +93,24 @@ router.post('/signup', async (req, res) => {
 router.route('/resume/:userID')
   .get(handleGetUserResume);
 
-router.route('/chooseTemplates')
+// router.route('/resume')
+//   .get(requireAuth, handleGetUserResume);
+
+router.route('/templates')
   .get(handleGetTemplateImages);
 
+// router.route('/portfolios')
+//   .get(requireAuth, handleGetPortfolios);
+
+// gets user's portfolios
+router.route('/portfolios')
+  .get(handleGetPortfolios);
+
+router.route('/portfolios/create/:templateId')
+  .post(handleCreatePortfolio);
+
 router.route('/portfolios/:id')
-  .post(handleCreatePortfolio)
+  .get(handleGetPortfolio)
   .put(handleUpdatePortfolio);
 
 export default router;
