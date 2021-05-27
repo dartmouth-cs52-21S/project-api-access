@@ -51,10 +51,7 @@ import mongoose, { Schema } from 'mongoose';
 
 // create a PostSchema with a title field
 const PortfolioSchema = new Schema({
-  title: String,
-  tags: String,
-  content: String,
-  coverUrl: String,
+  name: { type: String },
   header: { JSON },
   aboutMe: { JSON },
   projects: { JSON },
