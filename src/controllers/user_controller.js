@@ -69,6 +69,15 @@ export const getUserResume = async (id) => {
     console.log('user', user);
     return user.resume;
   } catch (error) {
-    throw new Error(`create post error: ${error}`);
+    throw new Error(`get user resume error: ${error}`);
+  }
+};
+
+export const getUserPortfolios = async (userId) => {
+  try {
+    const user = User.findOne({ _id: userId });
+    return user.portfolioIds;
+  } catch (error) {
+    throw new Error(`get user portfolios error: ${error}`);
   }
 };
