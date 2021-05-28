@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as UserController from './controllers/user_controller';
 import * as Portfolios from './controllers/portfolio_controller';
-// import { requireAuth, requireSignin } from './services/passport';
+import { requireSignin } from './services/passport';
 
 const router = Router();
 
@@ -72,19 +72,24 @@ const handleGetPortfolio = async (req, res) => {
   }
 };
 
-// router.post('/signin', requireSignin, async (req, res) => {
-//   try {
-//     const token = UserController.signin(req.user);
-//     res.json({ token, email: req.user.email, authorname: req.body.authorname });
-//   } catch (error) {
-//     res.status(422).send({ error: error.toString() });
-//   }
-// });
+router.post('/signin', requireSignin, async (req, res) => {
+  try {
+    console.log('user', req.user);
+    const token = UserController.signin(req.user);
+    res.json({
+      token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName,
+    });
+  } catch (error) {
+    res.status(422).send({ error: error.toString() });
+  }
+});
 
 router.post('/signup', async (req, res) => {
   try {
     const token = await UserController.signup(req.body);
-    res.json({ token, email: req.body.email, authorname: req.body.name });
+    res.json({
+      token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName,
+    });
   } catch (error) {
     res.status(422).send({ error: error.toString() });
   }

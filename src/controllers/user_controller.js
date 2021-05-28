@@ -10,7 +10,9 @@ export const signin = (user) => {
 };
 
 // note the lovely destructuring here indicating that we are passing in an object with these 3 keys
-export const signup = async ({ email, password, name }) => {
+export const signup = async ({
+  firstName, lastName, email, password,
+}) => {
   if (!email || !password) {
     throw new Error('You must provide email and password');
   }
@@ -20,14 +22,20 @@ export const signup = async ({ email, password, name }) => {
   if (existingUser) {
     throw new Error('Email is in use');
   }
+  console.log('signup');
 
   const user = new User();
   user.email = email;
   user.password = password;
-  user.authorname = name;
+  user.firstName = firstName;
+  user.lastName = lastName;
+  user.portfolioIds = [];
+  user.resume = {};
+  // user.authorname = name;
 
   try {
     const savedUser = await user.save();
+    console.log('savedUser', savedUser);
     return tokenForUser(savedUser);
   } catch (error) {
     throw new Error(`Signup error: ${error}`);
