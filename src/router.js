@@ -66,7 +66,9 @@ const handleGetUserResume = async (req, res) => {
 const handleGetPortfolio = async (req, res) => {
   try {
     // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
-    const result = Portfolios.getPortfolio(req.params.id);
+    console.log('handleGetPortfolio', req.params.id);
+    const result = await Portfolios.getPortfolio(req.params.id);
+    console.log('result', result);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -78,7 +80,7 @@ router.post('/signin', requireSignin, async (req, res) => {
     console.log('user', req.user);
     const token = UserController.signin(req.user);
     res.json({
-      token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName,
+      token, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName,
     });
   } catch (error) {
     res.status(422).send({ error: error.toString() });
