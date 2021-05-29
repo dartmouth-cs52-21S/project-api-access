@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as UserController from './controllers/user_controller';
 import * as Portfolios from './controllers/portfolio_controller';
-import { requireSignin } from './services/passport';
+import { requireAuth, requireSignin } from './services/passport';
 
 const router = Router();
 
@@ -55,8 +55,8 @@ const handleGetPortfolios = async (req, res) => {
 const handleGetUserResume = async (req, res) => {
   try {
     console.log('resume');
-    // const result = await UserController.getUserResume(req.user.id);
-    const result = await UserController.getUserResume(req.params.userID);
+    const result = await UserController.getUserResume(req.user.id);
+    // const result = await UserController.getUserResume(req.params.userID);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -65,6 +65,7 @@ const handleGetUserResume = async (req, res) => {
 
 const handleGetPortfolio = async (req, res) => {
   try {
+    // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
     const result = Portfolios.getPortfolio(req.params.id);
     res.json(result);
   } catch (error) {
@@ -95,27 +96,28 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.route('/resume/:userID')
-  .get(handleGetUserResume);
+// router.route('/resume/:userID')
+//   .get(handleGetUserResume);
 
-// router.route('/resume')
-//   .get(requireAuth, handleGetUserResume);
+router.route('/resume')
+  .get(requireAuth, handleGetUserResume);
 
 router.route('/templates')
-  .get(handleGetTemplateImages);
+  .get(requireAuth, handleGetTemplateImages);
 
-// router.route('/portfolios')
-//   .get(requireAuth, handleGetPortfolios);
+// get user's current list of portfolios
+router.route('/portfolios')
+  .get(requireAuth, handleGetPortfolios);
 
 // gets user's portfolios
-router.route('/portfolios')
-  .get(handleGetPortfolios);
+// router.route('/portfolios')
+//   .get(handleGetPortfolios);
 
 router.route('/portfolios/create/:templateId')
-  .post(handleCreatePortfolio);
+  .post(requireAuth, handleCreatePortfolio);
 
 router.route('/portfolios/:id')
   .get(handleGetPortfolio)
-  .put(handleUpdatePortfolio);
+  .put(requireAuth, handleUpdatePortfolio);
 
 export default router;
