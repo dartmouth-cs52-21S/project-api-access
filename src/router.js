@@ -68,9 +68,19 @@ const handleGetPortfolios = async (req, res) => {
 
 const handleGetUserResume = async (req, res) => {
   try {
-    console.log('resume');
+    console.log('get resume');
     const result = await UserController.getUserResume(req.user.id);
     // const result = await UserController.getUserResume(req.params.userID);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleUpdateUserResume = async (req, res) => {
+  try {
+    console.log('update resume');
+    const result = await UserController.updateUserResume(req.user.id, req.body);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -112,11 +122,9 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// router.route('/resume/:userID')
-//   .get(handleGetUserResume);
-
 router.route('/resume')
-  .get(requireAuth, handleGetUserResume);
+  .get(requireAuth, handleGetUserResume)
+  .put(requireAuth, handleUpdateUserResume);
 
 router.route('/templates')
   .get(requireAuth, handleGetTemplateImages);

@@ -74,7 +74,15 @@ export const getUser = async (id) => {
 export const getUserResume = async (id) => {
   try {
     const user = await User.findOne({ _id: id });
-    console.log('user', user);
+    return user.resume;
+  } catch (error) {
+    throw new Error(`get user resume error: ${error}`);
+  }
+};
+
+export const updateUserResume = async (id, resumeFields) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: id }, resumeFields, { new: true });
     return user.resume;
   } catch (error) {
     throw new Error(`get user resume error: ${error}`);
