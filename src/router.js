@@ -79,7 +79,7 @@ const handleGetUserResume = async (req, res) => {
 
 const handleUpdateUserResume = async (req, res) => {
   try {
-    console.log('update resume');
+    console.log('update resume body', req.body);
     const result = await UserController.updateUserResume(req.user.id, req.body);
     res.json(result);
   } catch (error) {
@@ -138,8 +138,9 @@ router.post('/signin', requireSignin, async (req, res) => {
 router.post('/signup', async (req, res) => {
   try {
     const token = await UserController.signup(req.body);
+    console.log('post /signup', req.body);
     res.json({
-      token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName,
+      token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName, resume: req.body.resume,
     });
   } catch (error) {
     res.status(422).send({ error: error.toString() });

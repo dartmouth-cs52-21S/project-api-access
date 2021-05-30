@@ -21,6 +21,7 @@ const UserSchema = new Schema({
     },
   },
   timestamps: true,
+  minimize: false,
 });
 
 UserSchema.pre('save', async function beforeUserSave(next) {

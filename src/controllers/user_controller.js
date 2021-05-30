@@ -11,7 +11,7 @@ export const signin = (user) => {
 
 // note the lovely destructuring here indicating that we are passing in an object with these 3 keys
 export const signup = async ({
-  firstName, lastName, email, password,
+  firstName, lastName, email, password, resume,
 }) => {
   if (!email || !password) {
     throw new Error('You must provide email and password');
@@ -22,16 +22,13 @@ export const signup = async ({
   if (existingUser) {
     throw new Error('Email is in use');
   }
-  console.log('signup');
-  console.log('in signup firstName:', firstName);
-
   const user = new User();
   user.email = email;
   user.password = password;
   user.firstName = firstName;
   user.lastName = lastName;
   user.portfolioIds = [];
-  user.resume = {};
+  user.resume = resume;
   console.log('creating user in signup', user);
   // user.authorname = name;
 
@@ -84,7 +81,8 @@ export const getUserResume = async (id) => {
 
 export const updateUserResume = async (id, resumeFields) => {
   try {
-    const user = await User.findOneAndUpdate({ _id: id }, resumeFields, { new: true });
+    console.log('updateUserResume', resumeFields);
+    const user = await User.findOneAndUpdate({ _id: id }, { $set: { resume: resumeFields } }, { new: true });
     return user.resume;
   } catch (error) {
     throw new Error(`get user resume error: ${error}`);
