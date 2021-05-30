@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-plusplus */
 import { Router } from 'express';
 import * as UserController from './controllers/user_controller';
 import * as Portfolios from './controllers/portfolio_controller';
@@ -15,8 +17,11 @@ router.get('/', (req, res) => {
 
 const handleCreatePortfolio = async (req, res) => {
   try {
-    // console.log('handlecreateportfolio', req.body);
-    const result = await Portfolios.createPortfolio(req.params.templateId, req.body);
+    console.log('handlecreateportfolio body', req.body);
+    console.log('handlecreateportfolio user', req.user);
+    console.log('handlecreateportfolio templateid', req.params.templateId);
+
+    const result = await Portfolios.createPortfolio(req.params.templateId, req.body, req.user);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -44,9 +49,18 @@ const handleUpdatePortfolio = async (req, res) => {
 const handleGetPortfolios = async (req, res) => {
   try {
     console.log('user id in handleGetPortfolios', req.user.id);
-    const result = await UserController.getUserPortfolios(req.user.id);
-    Portfolios.updatePortfolio(req.params.id, req.body);
-    res.json(result);
+    const userPortfolioIds = await UserController.getUserPortfolios(req.user.id);
+    // Portfolios.updatePortfolio(req.params.id, req.body);
+    console.log('user portfolio ids', userPortfolioIds);
+    const portfolios = await Portfolios.getPortfolios(userPortfolioIds);
+    // if (userPortfolioIds.length !== 0) {
+    //   let i;
+    //   for (i = 0; i < userPortfolioIds.length; i++) {
+    //     portfolios.push(await Portfolios.getPortfolio(userPortfolioIds[i]));
+    //   }
+    // }
+    console.log('user portfolios', portfolios);
+    res.json(portfolios);
   } catch (error) {
     res.status(500).json({ error });
   }

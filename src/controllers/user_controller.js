@@ -52,7 +52,7 @@ export const getUsers = async () => {
   // await finding posts
   // return posts
   try {
-    const users = User.find();
+    const users = await User.find();
     // console.log('users (usercontroller):', users);
     return users;
   } catch (error) {
@@ -64,7 +64,7 @@ export const getUser = async (id) => {
   // await finding posts
   // return posts
   try {
-    const user = User.findById(id);
+    const user = await User.findById(id);
     return user;
   } catch (error) {
     throw new Error(`create post error: ${error}`);
@@ -73,7 +73,7 @@ export const getUser = async (id) => {
 
 export const getUserResume = async (id) => {
   try {
-    const user = User.findOne({ _id: id });
+    const user = await User.findOne({ _id: id });
     console.log('user', user);
     return user.resume;
   } catch (error) {
@@ -83,7 +83,8 @@ export const getUserResume = async (id) => {
 
 export const getUserPortfolios = async (userId) => {
   try {
-    const user = User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId });
+    console.log('getUserportfolios', user.portfolioIds);
     return user.portfolioIds;
   } catch (error) {
     throw new Error(`get user portfolios error: ${error}`);
