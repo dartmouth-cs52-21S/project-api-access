@@ -185,6 +185,17 @@ export const updatePortfolio = async (id, portfolioFields) => {
   }
 };
 
+export const deletePortfolio = async (id) => {
+  // await deleting a post
+  // return confirmation
+  try {
+    const deletedPortfolio = await Portfolio.findByIdAndRemove(id);
+    return deletedPortfolio;
+  } catch (error) {
+    throw new Error(`delete portfolio error: ${error}`);
+  }
+};
+
 export const getTemplateImages = async () => {
   // console.log('getTemplateImages', chooseTemplateImages);
   return chooseTemplateImages;

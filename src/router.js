@@ -46,6 +46,15 @@ const handleUpdatePortfolio = async (req, res) => {
   }
 };
 
+const handleDeletePortfolio = async (req, res) => {
+  try {
+    const result = await Portfolios.deletePortfolio(req.params.id);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 const handleGetPortfolios = async (req, res) => {
   try {
     console.log('user id in handleGetPortfolios', req.user.id);
@@ -171,6 +180,7 @@ router.route('/portfolios/create/:templateId')
 
 router.route('/portfolios/:id')
   .get(handleGetPortfolio)
-  .put(requireAuth, handleUpdatePortfolio);
+  .put(requireAuth, handleUpdatePortfolio)
+  .delete(handleDeletePortfolio);
 
 export default router;
