@@ -140,8 +140,8 @@ const templates = [
 ];
 
 const chooseTemplateImages = [
-  'https://files.slack.com/files-pri/TQ19QMD6Z-F022T0APB8W/screen_shot_2021-05-25_at_12.05.32_pm.png',
-  'https://files.slack.com/files-pri/TQ19QMD6Z-F022T0APB8W/screen_shot_2021-05-25_at_12.05.32_pm.png',
+  'https://i.postimg.cc/xdnD6bTd/ezgif-com-gif-maker.png',
+  'https://i.postimg.cc/HkBDPkJ4/Screen-Shot-2021-05-30-at-12-29-35-AM.png',
 ];
 
 // export const createPortfolio = async (templateId) => {
