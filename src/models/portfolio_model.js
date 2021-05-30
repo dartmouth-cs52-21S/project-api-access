@@ -56,10 +56,12 @@ const PortfolioSchema = new Schema({
   aboutMe: Object,
   projects: Object,
   contactMe: Object,
+  resume: Object,
 }, {
   toObject: { virtuals: true },
   toJSON: { virtuals: true },
   timestamps: true,
+  minimize: false,
 });
 
 // create PostModel class from schema

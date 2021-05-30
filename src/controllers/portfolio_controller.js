@@ -157,7 +157,7 @@ export const createPortfolio = async (templateId, fields, user) => {
   portfolio.aboutMe = template.aboutMe;
   portfolio.projects = template.projects;
   portfolio.contactMe = template.contactMe;
-  // console.log('user', user.email);
+  portfolio.resume = {};
   try {
     const savedPortfolio = await portfolio.save();
     console.log('savedPortfolio', savedPortfolio);
