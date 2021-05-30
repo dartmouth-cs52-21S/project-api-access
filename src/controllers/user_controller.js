@@ -23,6 +23,7 @@ export const signup = async ({
     throw new Error('Email is in use');
   }
   console.log('signup');
+  console.log('in signup firstName:', firstName);
 
   const user = new User();
   user.email = email;
@@ -31,6 +32,7 @@ export const signup = async ({
   user.lastName = lastName;
   user.portfolioIds = [];
   user.resume = {};
+  console.log('creating user in signup', user);
   // user.authorname = name;
 
   try {
@@ -94,6 +96,27 @@ export const getUserPortfolios = async (userId) => {
     const user = await User.findOne({ _id: userId });
     console.log('getUserportfolios', user.portfolioIds);
     return user.portfolioIds;
+  } catch (error) {
+    throw new Error(`get user portfolios error: ${error}`);
+  }
+};
+
+export const getProfile = async (userId) => {
+  try {
+    const user = await User.findOne({ _id: userId });
+    console.log('getUserProfile', user);
+    return user;
+  } catch (error) {
+    throw new Error(`get user portfolios error: ${error}`);
+  }
+};
+
+// make sure it updates everything but the userId and resume? break profileFields?
+export const updateProfile = async (userId, profileFields) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
+    console.log('updateUserProfile', profileFields);
+    return user.profileFields;
   } catch (error) {
     throw new Error(`get user portfolios error: ${error}`);
   }

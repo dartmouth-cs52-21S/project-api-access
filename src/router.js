@@ -99,6 +99,30 @@ const handleGetPortfolio = async (req, res) => {
   }
 };
 
+const handleGetProfile = async (req, res) => {
+  try {
+    // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
+    console.log('handleGetProfile', req.user.id);
+    const result = await UserController.getProfile(req.user.id);
+    console.log('result', result);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleUpdateProfile = async (req, res) => {
+  try {
+    // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
+    console.log('handleUpdateProfile', req.user.id);
+    const result = await UserController.updateProfile(req.user.id, req.body);
+    console.log('result', result);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 router.post('/signin', requireSignin, async (req, res) => {
   try {
     console.log('user', req.user);
@@ -136,6 +160,10 @@ router.route('/portfolios')
 // gets user's portfolios
 // router.route('/portfolios')
 //   .get(handleGetPortfolios);
+
+router.route('/profile')
+  .get(requireAuth, handleGetProfile)
+  .put(requireAuth, handleUpdateProfile);
 
 router.route('/portfolios/create/:templateId')
   .post(requireAuth, handleCreatePortfolio);
