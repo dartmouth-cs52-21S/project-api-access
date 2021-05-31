@@ -203,7 +203,7 @@ export const getTemplateImages = async () => {
 
 export const getPortfolio = async (id) => {
   try {
-    const portfolio = await Portfolio.find({ _id: id });
+    const portfolio = await Portfolio.findOne({ _id: id });
     // console.log('getPortfolio', portfolio);
     return portfolio;
   } catch (error) {
