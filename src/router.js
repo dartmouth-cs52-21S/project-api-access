@@ -75,26 +75,26 @@ const handleGetPortfolios = async (req, res) => {
   }
 };
 
-const handleGetUserResume = async (req, res) => {
-  try {
-    console.log('get resume');
-    const result = await UserController.getUserResume(req.user.id);
-    // const result = await UserController.getUserResume(req.params.userID);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
+// const handleGetUserResume = async (req, res) => {
+//   try {
+//     console.log('get resume');
+//     const result = await UserController.getUserResume(req.user.id);
+//     // const result = await UserController.getUserResume(req.params.userID);
+//     res.json(result);
+//   } catch (error) {
+//     res.status(500).json({ error });
+//   }
+// };
 
-const handleUpdateUserResume = async (req, res) => {
-  try {
-    console.log('update resume body', req.body);
-    const result = await UserController.updateUserResume(req.user.id, req.body);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
+// const handleUpdateUserResume = async (req, res) => {
+//   try {
+//     console.log('update resume body', req.body);
+//     const result = await UserController.updateUserResume(req.user.id, req.body);
+//     res.json(result);
+//   } catch (error) {
+//     res.status(500).json({ error });
+//   }
+// };
 
 const handleGetPortfolio = async (req, res) => {
   try {
@@ -140,7 +140,7 @@ router.post('/signin', requireSignin, async (req, res) => {
       token, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName,
     });
   } catch (error) {
-    res.status(422).send({ error: error.toString() });
+    res.status(422).json({ error: error.toString() });
   }
 });
 
@@ -152,13 +152,16 @@ router.post('/signup', async (req, res) => {
       token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName, resume: req.body.resume,
     });
   } catch (error) {
-    res.status(422).send({ error: error.toString() });
+    console.log('error', error.toString());
+    // res.status(422).json
+    res.status(422).json({ error: error.toString() });
+    // res.send({ error: error.toString() });
   }
 });
 
-router.route('/resume')
-  .get(requireAuth, handleGetUserResume)
-  .put(requireAuth, handleUpdateUserResume);
+// router.route('/resume')
+//   .get(requireAuth, handleGetUserResume)
+//   .put(requireAuth, handleUpdateUserResume);
 
 router.route('/templates')
   .get(requireAuth, handleGetTemplateImages);
