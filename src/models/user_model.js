@@ -2,10 +2,11 @@ import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const UserSchema = new Schema({
+  firstName: { type: String },
+  lastName: { type: String },
   email: { type: String, unique: true, lowercase: true },
   password: { type: String },
-  name: { type: String },
-  resume: { type: JSON },
+  portfolioIds: [String],
 }, {
   toObject: { virtuals: true },
   toJSON: {
@@ -19,6 +20,7 @@ const UserSchema = new Schema({
     },
   },
   timestamps: true,
+  minimize: false,
 });
 
 UserSchema.pre('save', async function beforeUserSave(next) {
