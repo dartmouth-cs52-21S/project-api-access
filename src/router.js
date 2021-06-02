@@ -140,6 +140,7 @@ router.post('/signin', requireSignin, async (req, res) => {
       token, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName,
     });
   } catch (error) {
+    // console.log('error', error.toString());
     res.status(422).json({ error: error.toString() });
   }
 });
@@ -152,10 +153,8 @@ router.post('/signup', async (req, res) => {
       token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName, resume: req.body.resume,
     });
   } catch (error) {
-    console.log('error', error.toString());
-    // res.status(422).json
+    // console.log('error', error.toString());
     res.status(422).json({ error: error.toString() });
-    // res.send({ error: error.toString() });
   }
 });
 
