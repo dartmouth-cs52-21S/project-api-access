@@ -92,7 +92,7 @@ export const updateUserResume = async (id, resumeFields) => {
 export const getUserPortfolios = async (userId) => {
   try {
     const user = await User.findOne({ _id: userId });
-    console.log('getUserportfolios', user.portfolioIds);
+    // console.log('getUserportfolios', user.portfolioIds);
     return user.portfolioIds;
   } catch (error) {
     throw new Error(`get user portfolios error: ${error}`);
@@ -102,7 +102,7 @@ export const getUserPortfolios = async (userId) => {
 export const getProfile = async (userId) => {
   try {
     const user = await User.findOne({ _id: userId });
-    console.log('getUserProfile', user);
+    // console.log('getUserProfile', user);
     return user;
   } catch (error) {
     throw new Error(`get user portfolios error: ${error}`);
@@ -113,8 +113,8 @@ export const getProfile = async (userId) => {
 export const updateProfile = async (userId, profileFields) => {
   try {
     const user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
-    console.log('updateUserProfile', profileFields);
-    return user.profileFields;
+    // console.log('updateUserProfile', profileFields);
+    return user;
   } catch (error) {
     throw new Error(`get user portfolios error: ${error}`);
   }

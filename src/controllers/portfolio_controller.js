@@ -185,11 +185,18 @@ export const updatePortfolio = async (id, portfolioFields) => {
   }
 };
 
-export const deletePortfolio = async (id) => {
+export const deletePortfolio = async (id, user) => {
   // await deleting a post
   // return confirmation
   try {
+    // console.log('id', id);
+    // console.log('user', user);
     const deletedPortfolio = await Portfolio.findByIdAndRemove(id);
+    // console.log('deletingPortfolio', deletedPortfolio);
+    await User.updateOne(
+      { email: user.email },
+      { $pullAll: { portfolioIds: [id] } },
+    );
     return deletedPortfolio;
   } catch (error) {
     throw new Error(`delete portfolio error: ${error}`);
