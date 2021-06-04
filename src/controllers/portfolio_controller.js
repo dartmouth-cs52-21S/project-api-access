@@ -11,7 +11,7 @@ const templates = [
         color: 'white',
         backgroundColor: 'black',
         font: 'Raleway',
-        fontSize: '72px',
+        fontSize: '4.5em',
         weight: 400,
         paddingTop: '300px',
         paddingLeft: '300px',
@@ -26,7 +26,7 @@ const templates = [
         color: 'white',
         backgroundColor: 'black',
         font: 'Raleway',
-        fontSize: '50px',
+        fontSize: '2.5em',
         weight: 400,
         paddingBottom: '300px',
         paddingLeft: '300px',
@@ -43,7 +43,7 @@ const templates = [
       color: 'white',
       backgroundColor: '#424242',
       font: 'Raleway',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // userImage: taken from resume json
       // content: taken from resume json in user
@@ -56,7 +56,7 @@ const templates = [
       color: 'white',
       backgroundColor: 'black',
       font: 'Raleway',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // projects: [<project1 content>, <project2 content>, ...] // taken from resume
       flexDirection: 'column',
@@ -68,7 +68,7 @@ const templates = [
       color: 'white',
       backgroundColor: '#424242',
       font: 'Raleway',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // content: (taken from user DB)
       flexDirection: 'row',
@@ -82,7 +82,7 @@ const templates = [
         color: 'black',
         backgroundColor: 'white',
         font: 'Oswald',
-        fontSize: '72px',
+        fontSize: '4.5em',
         weight: 400,
         paddingTop: '300px',
         paddingLeft: '300px',
@@ -97,7 +97,7 @@ const templates = [
         color: 'black',
         backgroundColor: 'white',
         font: 'Oswald',
-        fontSize: '40px',
+        fontSize: '2.5em',
         weight: 400,
         paddingBottom: '300px',
         paddingLeft: '300px',
@@ -114,7 +114,7 @@ const templates = [
       color: 'white',
       backgroundColor: 'black',
       font: 'Oswald',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // userImage: taken from resume json
       // content: taken from resume json in user
@@ -128,7 +128,7 @@ const templates = [
       color: 'black',
       backgroundColor: 'white',
       font: 'Oswald',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // projects: [<project1 content>, <project2 content>, ...] // taken from resume
       flexDirection: 'column',
@@ -141,7 +141,7 @@ const templates = [
       color: 'white',
       backgroundColor: 'black',
       font: 'Oswald',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // content: (taken from user DB)
       flexDirection: 'row',
@@ -155,7 +155,7 @@ const templates = [
         color: 'white',
         backgroundColor: '#5CDB95',
         font: 'Squada One',
-        fontSize: '72px',
+        fontSize: '4.5em',
         weight: 400,
         paddingTop: '300px',
         paddingLeft: '300px',
@@ -170,7 +170,7 @@ const templates = [
         color: 'black',
         backgroundColor: '#5CDB95',
         font: 'Squada One',
-        fontSize: '40px',
+        fontSize: '2.5em',
         weight: 400,
         paddingBottom: '300px',
         paddingLeft: '300px',
@@ -187,7 +187,7 @@ const templates = [
       color: 'white',
       backgroundColor: '#05386B',
       font: 'Squada One',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // userImage: taken from resume json
       // content: taken from resume json in user
@@ -200,7 +200,7 @@ const templates = [
       color: 'white',
       backgroundColor: '#5CDB95',
       font: 'Squada One',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // projects: [<project1 content>, <project2 content>, ...] // taken from resume
       flexDirection: 'row',
@@ -212,7 +212,7 @@ const templates = [
       color: 'white',
       backgroundColor: '#05386B',
       font: 'Squada One',
-      fontSize: '36px',
+      fontSize: '2em',
       padding: '300px',
       // content: (taken from user DB)
       flexDirection: 'row',
