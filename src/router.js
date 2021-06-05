@@ -11,10 +11,6 @@ router.get('/', (req, res) => {
   res.json({ message: 'Hello World' });
 });
 
-// router.get('/', (req, res) => {
-//   res.json({ message: 'Hello World' });
-// });
-
 const handleCreatePortfolio = async (req, res) => {
   try {
     console.log('handlecreateportfolio body', req.body);
@@ -76,33 +72,12 @@ const handleGetPortfolios = async (req, res) => {
   }
 };
 
-// const handleGetUserResume = async (req, res) => {
-//   try {
-//     console.log('get resume');
-//     const result = await UserController.getUserResume(req.user.id);
-//     // const result = await UserController.getUserResume(req.params.userID);
-//     res.json(result);
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// };
-
-// const handleUpdateUserResume = async (req, res) => {
-//   try {
-//     console.log('update resume body', req.body);
-//     const result = await UserController.updateUserResume(req.user.id, req.body);
-//     res.json(result);
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// };
-
 const handleGetPortfolio = async (req, res) => {
   try {
     // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
-    console.log('handleGetPortfolio', req.params.id);
+    // console.log('handleGetPortfolio', req.params.id);
     const result = await Portfolios.getPortfolio(req.params.id);
-    console.log('result', result);
+    // console.log('result', result);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -114,7 +89,7 @@ const handleGetProfile = async (req, res) => {
     // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
     console.log('handleGetProfile', req.user.id);
     const result = await UserController.getProfile(req.user.id);
-    console.log('result', result);
+    // console.log('result', result);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -124,12 +99,13 @@ const handleGetProfile = async (req, res) => {
 const handleUpdateProfile = async (req, res) => {
   try {
     // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
-    console.log('handleUpdateProfile', req.user.id);
+    // console.log('handleUpdateProfile', req.user.id);
     const result = await UserController.updateProfile(req.user.id, req.body);
-    console.log('result', result);
+    // console.log('result', result);
     res.json(result);
   } catch (error) {
-    res.status(500).json({ error });
+    console.log('error', error.toString());
+    res.status(500).json({ error: error.toString() });
   }
 };
 
@@ -149,7 +125,7 @@ router.post('/signin', requireSignin, async (req, res) => {
 router.post('/signup', async (req, res) => {
   try {
     const token = await UserController.signup(req.body);
-    console.log('post /signup', req.body);
+    // console.log('post /signup', req.body);
     res.json({
       token, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName, resume: req.body.resume,
     });
@@ -159,20 +135,12 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// router.route('/resume')
-//   .get(requireAuth, handleGetUserResume)
-//   .put(requireAuth, handleUpdateUserResume);
-
 router.route('/templates')
   .get(requireAuth, handleGetTemplateImages);
 
 // get user's current list of portfolios
 router.route('/portfolios')
   .get(requireAuth, handleGetPortfolios);
-
-// gets user's portfolios
-// router.route('/portfolios')
-//   .get(handleGetPortfolios);
 
 router.route('/profile')
   .get(requireAuth, handleGetProfile)

@@ -105,17 +105,27 @@ export const getProfile = async (userId) => {
     // console.log('getUserProfile', user);
     return user;
   } catch (error) {
-    throw new Error(`get user portfolios error: ${error}`);
+    throw new Error(`get user profile error: ${error}`);
   }
 };
 
 // make sure it updates everything but the userId and resume? break profileFields?
 export const updateProfile = async (userId, profileFields) => {
   try {
-    const user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
-    // console.log('updateUserProfile', profileFields);
+    let user = await User.findOne({ _id: userId });
+    // console.log('currUser email', user.email);
+    // console.log('profiledFields email', profileFields.email);
+    if (user.email !== profileFields.email) {
+      const newEmail = profileFields.email;
+      const existingUser = await User.findOne({ email: newEmail });
+      if (existingUser) {
+        throw new Error('Email is in use');
+      } else {
+        user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
+      }
+    }
     return user;
   } catch (error) {
-    throw new Error(`get user portfolios error: ${error}`);
+    throw new Error(`${error}`);
   }
 };
