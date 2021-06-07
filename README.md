@@ -35,6 +35,14 @@ Install all packages using npm
 ```
 $ npm install
 ```
+Add all authentication keys in .env file. Here's how it should look like
+```
+AUTH_SECRET=<INPUT AUTH SECRET>
+AWS_ACCESS_KEY_ID=<INPUT AWS ACCESS KEY ID>
+AWS_SECRET_ACCESS_KEY=<INPUT AWS SECRET ACCESS KEY>
+S3_BUCKET_NAME=<INPUT AWS S3 BUCKET NAME>
+```
+
 To run the web app locally, do
 ```
 $ npm start
