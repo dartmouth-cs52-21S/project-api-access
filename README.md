@@ -4,6 +4,9 @@
 
 [*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
 
+[Client Link](https://resumov.netlify.app/)
+[API Link](https://cs52access.herokuapp.com/)
+
 TODO: short project description, some sample screenshots or mockups
 
 Access is a web application that enables users to generate a portfolio website automatically by filling in fields from their resume. Users will input information regarding their education, work experiences, projects, etc., and be returned a selection of website templates featuring different stylistic choices. This website will be automatically deployed by our application. 
