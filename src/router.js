@@ -103,7 +103,7 @@ const handleGetProfile = async (req, res) => {
 const handleUpdateProfile = async (req, res) => {
   try {
     // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
-    // console.log('handleUpdateProfile', req.user.id);
+    console.log('handleUpdateProfile', req.body);
     const result = await UserController.updateProfile(req.user.id, req.body);
     // console.log('result', result);
     res.json(result);

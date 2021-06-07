@@ -121,10 +121,9 @@ export const updateProfile = async (userId, profileFields) => {
       const existingUser = await User.findOne({ email: newEmail });
       if (existingUser) {
         throw new Error('Email is in use');
-      } else {
-        user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
       }
     }
+    user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
     return user;
   } catch (error) {
     throw new Error(`${error}`);
