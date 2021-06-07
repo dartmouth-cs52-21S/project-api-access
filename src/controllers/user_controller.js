@@ -29,6 +29,7 @@ export const signup = async ({
   user.lastName = lastName;
   user.portfolioIds = [];
   user.resume = resume;
+  user.profileUrl = '';
   console.log('creating user in signup', user);
   // user.authorname = name;
 

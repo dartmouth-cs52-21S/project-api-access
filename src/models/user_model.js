@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: { type: String },
   portfolioIds: [String],
+  profileUrl: { type: String },
 }, {
   toObject: { virtuals: true },
   toJSON: {

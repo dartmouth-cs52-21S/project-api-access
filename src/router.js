@@ -4,12 +4,15 @@ import { Router } from 'express';
 import * as UserController from './controllers/user_controller';
 import * as Portfolios from './controllers/portfolio_controller';
 import { requireAuth, requireSignin } from './services/passport';
+import signS3 from './services/s3';
 
 const router = Router();
 
 router.get('/', (req, res) => {
   res.json({ message: 'Hello World' });
 });
+
+router.get('/sign-s3', signS3);
 
 const handleCreatePortfolio = async (req, res) => {
   try {
