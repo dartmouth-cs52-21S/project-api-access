@@ -3,13 +3,17 @@
 import { Router } from 'express';
 import * as UserController from './controllers/user_controller';
 import * as Portfolios from './controllers/portfolio_controller';
+import * as Images from './controllers/image_controller';
 import { requireAuth, requireSignin } from './services/passport';
+import signS3 from './services/s3';
 
 const router = Router();
 
 router.get('/', (req, res) => {
   res.json({ message: 'Hello World' });
 });
+
+router.get('/sign-s3', signS3);
 
 const handleCreatePortfolio = async (req, res) => {
   try {
@@ -99,12 +103,33 @@ const handleGetProfile = async (req, res) => {
 const handleUpdateProfile = async (req, res) => {
   try {
     // const result = Portfolios.getPortfolio(req.user.id); // Dont need user to be auth to see
-    // console.log('handleUpdateProfile', req.user.id);
+    console.log('handleUpdateProfile', req.body);
     const result = await UserController.updateProfile(req.user.id, req.body);
     // console.log('result', result);
     res.json(result);
   } catch (error) {
     console.log('error', error.toString());
+    res.status(500).json({ error: error.toString() });
+  }
+};
+
+const handleCreateImage = async (req, res) => {
+  try {
+    const result = await Images.createImage(req.body.url);
+    res.json(result);
+  } catch (error) {
+    console.log('handleCreateImage', error.toString());
+    res.status(500).json({ error: error.toString() });
+  }
+};
+
+const handleUpdateImage = async (req, res) => {
+  try {
+    console.log('req body url', req.body.url);
+    const result = await Images.updateImage(req.body.id, req.body.url);
+    res.json(result);
+  } catch (error) {
+    console.log('handleUpdateImage', error.toString());
     res.status(500).json({ error: error.toString() });
   }
 };
@@ -153,5 +178,9 @@ router.route('/portfolios/:id')
   .get(handleGetPortfolio)
   .put(requireAuth, handleUpdatePortfolio)
   .delete(requireAuth, handleDeletePortfolio);
+
+router.route('/images')
+  .post(handleCreateImage)
+  .put(handleUpdateImage);
 
 export default router;

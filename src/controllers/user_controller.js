@@ -29,12 +29,13 @@ export const signup = async ({
   user.lastName = lastName;
   user.portfolioIds = [];
   user.resume = resume;
-  console.log('creating user in signup', user);
+  user.profileUrl = '';
+  // console.log('creating user in signup', user);
   // user.authorname = name;
 
   try {
     const savedUser = await user.save();
-    console.log('savedUser', savedUser);
+    // console.log('savedUser', savedUser);
     return tokenForUser(savedUser);
   } catch (error) {
     throw new Error(`Signup error: ${error}`);
@@ -120,10 +121,9 @@ export const updateProfile = async (userId, profileFields) => {
       const existingUser = await User.findOne({ email: newEmail });
       if (existingUser) {
         throw new Error('Email is in use');
-      } else {
-        user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
       }
     }
+    user = await User.findOneAndUpdate({ _id: userId }, profileFields, { new: true });
     return user;
   } catch (error) {
     throw new Error(`${error}`);
