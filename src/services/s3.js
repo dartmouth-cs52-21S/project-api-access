@@ -18,6 +18,7 @@ const signS3 = (req, res) => {
     const returnData = {
       signedRequest: data,
       url: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/${fileName}`,
+      fileName,
     };
     return (res.send(JSON.stringify(returnData)));
   });

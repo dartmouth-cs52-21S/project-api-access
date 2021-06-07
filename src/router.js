@@ -3,6 +3,7 @@
 import { Router } from 'express';
 import * as UserController from './controllers/user_controller';
 import * as Portfolios from './controllers/portfolio_controller';
+import * as Images from './controllers/image_controller';
 import { requireAuth, requireSignin } from './services/passport';
 import signS3 from './services/s3';
 
@@ -112,6 +113,27 @@ const handleUpdateProfile = async (req, res) => {
   }
 };
 
+const handleCreateImage = async (req, res) => {
+  try {
+    const result = await Images.createImage(req.body.url);
+    res.json(result);
+  } catch (error) {
+    console.log('handleCreateImage', error.toString());
+    res.status(500).json({ error: error.toString() });
+  }
+};
+
+const handleUpdateImage = async (req, res) => {
+  try {
+    console.log('req body url', req.body.url);
+    const result = await Images.updateImage(req.body.id, req.body.url);
+    res.json(result);
+  } catch (error) {
+    console.log('handleUpdateImage', error.toString());
+    res.status(500).json({ error: error.toString() });
+  }
+};
+
 router.post('/signin', requireSignin, async (req, res) => {
   try {
     console.log('user', req.user);
@@ -156,5 +178,9 @@ router.route('/portfolios/:id')
   .get(handleGetPortfolio)
   .put(requireAuth, handleUpdatePortfolio)
   .delete(requireAuth, handleDeletePortfolio);
+
+router.route('/images')
+  .post(handleCreateImage)
+  .put(handleUpdateImage);
 
 export default router;

@@ -30,12 +30,12 @@ export const signup = async ({
   user.portfolioIds = [];
   user.resume = resume;
   user.profileUrl = '';
-  console.log('creating user in signup', user);
+  // console.log('creating user in signup', user);
   // user.authorname = name;
 
   try {
     const savedUser = await user.save();
-    console.log('savedUser', savedUser);
+    // console.log('savedUser', savedUser);
     return tokenForUser(savedUser);
   } catch (error) {
     throw new Error(`Signup error: ${error}`);
