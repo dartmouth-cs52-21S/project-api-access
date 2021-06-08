@@ -180,7 +180,7 @@ router.route('/portfolios/:id')
   .delete(requireAuth, handleDeletePortfolio);
 
 router.route('/images')
-  .post(requireAuth, handleCreateImage)
-  .put(requireAuth, handleUpdateImage);
+  .post(handleCreateImage)
+  .put(handleUpdateImage);
 
 export default router;
