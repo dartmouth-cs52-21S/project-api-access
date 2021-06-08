@@ -100,7 +100,6 @@ const handleCreateImage = async (req, res) => {
 const handleUpdateImage = async (req, res) => {
   try {
     const result = await Images.updateImage(req.body.id, req.body.url);
-    console.log('handleUpdateImage', result);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: error.toString() });

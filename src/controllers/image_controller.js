@@ -15,8 +15,6 @@ export const createImage = async (url) => {
 export const updateImage = async (id, url) => {
   try {
     const image = await Image.findOneAndUpdate({ _id: id }, { url }, { new: true });
-    // console.log('image', image);
-    console.log('uploadImage', image);
     return image;
   } catch (error) {
     throw new Error(`update image error: ${error}`);
