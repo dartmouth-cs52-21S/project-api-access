@@ -30,12 +30,9 @@ export const signup = async ({
   user.portfolioIds = [];
   user.resume = resume;
   user.profileUrl = '';
-  // console.log('creating user in signup', user);
-  // user.authorname = name;
 
   try {
     const savedUser = await user.save();
-    // console.log('savedUser', savedUser);
     return tokenForUser(savedUser);
   } catch (error) {
     throw new Error(`Signup error: ${error}`);
@@ -53,7 +50,6 @@ export const getUsers = async () => {
   // return posts
   try {
     const users = await User.find();
-    // console.log('users (usercontroller):', users);
     return users;
   } catch (error) {
     throw new Error(`create post error: ${error}`);
@@ -82,7 +78,6 @@ export const getUserResume = async (id) => {
 
 export const updateUserResume = async (id, resumeFields) => {
   try {
-    console.log('updateUserResume', resumeFields);
     const user = await User.findOneAndUpdate({ _id: id }, { $set: { resume: resumeFields } }, { new: true });
     return user.resume;
   } catch (error) {
@@ -93,7 +88,6 @@ export const updateUserResume = async (id, resumeFields) => {
 export const getUserPortfolios = async (userId) => {
   try {
     const user = await User.findOne({ _id: userId });
-    // console.log('getUserportfolios', user.portfolioIds);
     return user.portfolioIds;
   } catch (error) {
     throw new Error(`get user portfolios error: ${error}`);
@@ -103,7 +97,6 @@ export const getUserPortfolios = async (userId) => {
 export const getProfile = async (userId) => {
   try {
     const user = await User.findOne({ _id: userId });
-    // console.log('getUserProfile', user);
     return user;
   } catch (error) {
     throw new Error(`get user profile error: ${error}`);
@@ -114,8 +107,6 @@ export const getProfile = async (userId) => {
 export const updateProfile = async (userId, profileFields) => {
   try {
     let user = await User.findOne({ _id: userId });
-    // console.log('currUser email', user.email);
-    // console.log('profiledFields email', profileFields.email);
     if (user.email !== profileFields.email) {
       const newEmail = profileFields.email;
       const existingUser = await User.findOne({ email: newEmail });

@@ -14,7 +14,6 @@ const templates = [
         fontSize: '4.5em',
         weight: 400,
         padding: '350px',
-        // role: but taken from resume,
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
@@ -28,7 +27,6 @@ const templates = [
         fontSize: '2.5em',
         weight: 400,
         padding: '350px',
-        // role: but taken from resume,
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
@@ -42,8 +40,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // userImage: taken from resume json
-      // content: taken from resume json in user
       flexDirection: 'column',
       justifyContent: 'center',
     },
@@ -55,7 +51,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // projects: [<project1 content>, <project2 content>, ...] // taken from resume
       flexDirection: 'column',
       justifyContent: 'center',
     },
@@ -67,7 +62,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // content: (taken from user DB)
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
@@ -82,7 +76,6 @@ const templates = [
         fontSize: '4.5em',
         weight: 400,
         padding: '350px',
-        // role: but taken from resume,
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
@@ -96,7 +89,6 @@ const templates = [
         fontSize: '2.5em',
         weight: 400,
         padding: '350px',
-        // role: but taken from resume,
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
@@ -110,8 +102,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // userImage: taken from resume json
-      // content: taken from resume json in user
       flexDirection: 'column',
       justifyContent: 'Right',
       textAlign: 'left',
@@ -124,7 +114,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // projects: [<project1 content>, <project2 content>, ...] // taken from resume
       flexDirection: 'column',
       justifyContent: 'center',
       textAlign: 'right',
@@ -137,7 +126,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // content: (taken from user DB)
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
@@ -152,7 +140,6 @@ const templates = [
         fontSize: '4.5em',
         weight: 400,
         padding: '350px',
-        // role: but taken from resume,
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
@@ -166,7 +153,6 @@ const templates = [
         fontSize: '2.5em',
         weight: 400,
         padding: '350px',
-        // role: but taken from resume,
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
@@ -180,8 +166,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // userImage: taken from resume json
-      // content: taken from resume json in user
       flexDirection: 'row',
       justifyContent: 'space-evenly',
     },
@@ -193,7 +177,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // projects: [<project1 content>, <project2 content>, ...] // taken from resume
       flexDirection: 'row',
       justifyContent: 'space-evenly',
     },
@@ -205,7 +188,6 @@ const templates = [
       font: 'Raleway',
       fontSize: '2em',
       padding: '300px',
-      // content: (taken from user DB)
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
@@ -219,7 +201,6 @@ const chooseTemplateImages = [
   'https://i.postimg.cc/mr0XDWng/Screen-Shot-2021-06-07-at-2-51-46-AM.png',
 ];
 
-// export const createPortfolio = async (templateId) => {
 export const createPortfolio = async (templateId, fields, user) => {
   console.log('portfolioName', fields.portfolioName);
   // await creating a post
@@ -264,10 +245,7 @@ export const deletePortfolio = async (id, user) => {
   // await deleting a post
   // return confirmation
   try {
-    // console.log('id', id);
-    // console.log('user', user);
     const deletedPortfolio = await Portfolio.findByIdAndRemove(id);
-    // console.log('deletingPortfolio', deletedPortfolio);
     await User.updateOne(
       { email: user.email },
       { $pullAll: { portfolioIds: [id] } },
@@ -279,14 +257,12 @@ export const deletePortfolio = async (id, user) => {
 };
 
 export const getTemplateImages = async () => {
-  // console.log('getTemplateImages', chooseTemplateImages);
   return chooseTemplateImages;
 };
 
 export const getPortfolio = async (id) => {
   try {
     const portfolio = await Portfolio.findOne({ _id: id });
-    // console.log('getPortfolio', portfolio);
     return portfolio;
   } catch (error) {
     throw new Error(`get portfolio error: ${error}`);
