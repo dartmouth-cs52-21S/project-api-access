@@ -4,6 +4,9 @@
 
 [*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
 
+[Client Link](https://resumov.netlify.app/)
+[API Link](https://cs52access.herokuapp.com/)
+
 ## Description
 
 Resumov is a web application that enables users to generate multiple portfolio websites by filling in fields from their resume. Users will input information regarding their education, work experiences, projects, etc., and the web application would generate a portfolio of their choice according to the templates we have created. They are also able to customize their portfolio websites, which includes the content and the styles.
